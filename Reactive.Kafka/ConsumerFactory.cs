@@ -24,7 +24,8 @@ namespace Reactive.Kafka
             {
                 private readonly ISet<string> _brokers = new HashSet<string>();
                 private string _groupId;
-                TimeSpan? _sessionTimeout;
+                private TimeSpan? _sessionTimeout;
+                private string _clientId;
                 public IConsumerSettingsBuilder AddBroker(string host)
                 {
                     _brokers.Add(host);
@@ -48,6 +49,10 @@ namespace Reactive.Kafka
                         if (timeout_ms< 0) throw new NotSupportedException("Session timeout cannot be negative.");
                         settings.Add("session.timeout.ms", timeout_ms);
                     }
+                    if (_clientId != null)
+                    {
+                        settings.Add("client.id", _clientId);
+                    }
                     settings.Add("group.id", _groupId);
                     return settings;
                 }
@@ -55,6 +60,12 @@ namespace Reactive.Kafka
                 public IConsumerSettingsBuilder WithSessionTimeout(TimeSpan sessionTimeout)
                 {
                     _sessionTimeout = sessionTimeout;
+                    return this;
+                }
+
+                public IConsumerSettingsBuilder WithClientId(string clientId)
+                {
+                    _clientId = clientId;
                     return this;
                 }
             }

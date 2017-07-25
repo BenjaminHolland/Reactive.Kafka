@@ -6,7 +6,9 @@ namespace Reactive.Kafka
     {
         IConsumerSettingsBuilder AddBroker(string host);
         IConsumerSettingsBuilder WithGroupId(string groupId);
+        IConsumerSettingsBuilder WithClientId(string clientId);
         IConsumerSettingsBuilder WithSessionTimeout(TimeSpan sessionTimeout);
+        
         
     }
 }
