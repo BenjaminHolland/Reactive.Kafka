@@ -63,8 +63,11 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConsumerFactory.cs" />
+    <Compile Include="IConsumerBuilder.cs" />
+    <Compile Include="IConsumerSettingsBuilder.cs" />
+    <Compile Include="IProducerBuilder.cs" />
     <Compile Include="IProducerSettingsBuilder.cs" />
-    <Compile Include="X.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
