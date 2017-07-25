@@ -3,7 +3,7 @@
     <metadata>
         <!-- Required elements-->
         <id>Reactive.Kafka</id>
-        <version>$version$</version>
+        <version>1.0.0.0</version>
         <description>Reactive Wrapper for Apache Kafka</description>
         <authors>Benjamin Holland</authors>
         <dependencies>
