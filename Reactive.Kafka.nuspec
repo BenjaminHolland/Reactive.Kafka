@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <!-- Required elements-->
+        <id>Reactive.Kafka</id>
+        <version>$version$</version>
+        <description>Reactive Wrapper for Apache Kafka</description>
+        <authors>Benjamin Holland</authors>
+        <dependencies>
+            <dependency id="System.Reactive" version="3.1.1"/>
+            <dependency id="Confluent.Kafka" version="0.11.0"/>
+        </dependencies>
+    </metadata>
+</package>
