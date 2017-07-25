@@ -16,7 +16,6 @@ namespace Reactive.Kafka
     public delegate void ConsumerConfigurator<TKey, TValue>(IConsumerBuilder<TKey, TValue> builder);
     public delegate void ProducerConfigurator<TKey, TValue>(IProducerBuilder<TKey, TValue> builder);
 
-
     public static class ConsumerFactory
     {
         private sealed class ConsumerBuilder<TKey, TValue> : IConsumerBuilder<TKey, TValue>
@@ -25,6 +24,7 @@ namespace Reactive.Kafka
             {
                 private readonly ISet<string> _brokers = new HashSet<string>();
                 private string _groupId;
+                TimeSpan? _sessionTimeout;
                 public IConsumerSettingsBuilder AddBroker(string host)
                 {
                     _brokers.Add(host);
@@ -42,8 +42,20 @@ namespace Reactive.Kafka
                     if (_brokers.Count < 1) throw new InvalidOperationException("Consumer requires at least one broker.");
                     settings.Add("bootstrap.servers", String.Join(",", _brokers));
                     if (_groupId == null) throw new InvalidOperationException("Consumer must have a group id.");
+                    if (_sessionTimeout.HasValue)
+                    {
+                        int timeout_ms = checked((int)_sessionTimeout.Value.TotalMilliseconds);
+                        if (timeout_ms< 0) throw new NotSupportedException("Session timeout cannot be negative.");
+                        settings.Add("session.timeout.ms", timeout_ms);
+                    }
                     settings.Add("group.id", _groupId);
                     return settings;
+                }
+
+                public IConsumerSettingsBuilder WithSessionTimeout(TimeSpan sessionTimeout)
+                {
+                    _sessionTimeout = sessionTimeout;
+                    return this;
                 }
             }
             private readonly ISet<string> _topics = new HashSet<string>();

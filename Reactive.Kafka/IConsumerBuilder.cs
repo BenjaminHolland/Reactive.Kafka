@@ -8,5 +8,6 @@ namespace Reactive.Kafka
         IConsumerBuilder<TKey, TValue> SubscribedTo(string topic);
         IConsumerBuilder<TKey, TValue> WithKeyDeserializer(IDeserializer<TKey> keyDeserializer);
         IConsumerBuilder<TKey, TValue> WithValueDeserializer(IDeserializer<TValue> valueDeserializer);
+        
     }
 }
