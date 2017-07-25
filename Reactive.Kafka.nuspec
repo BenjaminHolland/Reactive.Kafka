@@ -13,6 +13,6 @@
         
     </metadata>
     <files>
-            <file src="bin\Debug\Reactive.Kafka.dll" target="lib"/>
+            <file src="Reactive.Kafka\bin\Debug\Reactive.Kafka.dll" target="lib"/>
     </files>
 </package>
