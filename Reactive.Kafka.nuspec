@@ -3,7 +3,7 @@
     <metadata>
         <!-- Required elements-->
         <id>Reactive.Kafka</id>
-        <version>1.0.0.0</version>
+        <version>$version$</version>
         <description>Reactive Wrapper for Apache Kafka</description>
         <authors>Benjamin Holland</authors>
         <dependencies>
@@ -13,6 +13,6 @@
         
     </metadata>
     <files>
-            <file src="Reactive.Kafka\bin\Debug\Reactive.Kafka.dll" target="lib"/>
+            <file src="Reactive.Kafka\bin\Debug\Reactive.Kafka.dll" target="lib\net452"/>
     </files>
 </package>
