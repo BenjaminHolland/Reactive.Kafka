@@ -8,7 +8,7 @@ namespace Reactive.Kafka
         IConsumerSettingsBuilder WithGroupId(string groupId);
         IConsumerSettingsBuilder WithClientId(string clientId);
         IConsumerSettingsBuilder WithSessionTimeout(TimeSpan sessionTimeout);
-        
+        IConsumerSettingsBuilder WithCustomSetting(string settingName, object settingValue);
         
     }
 }

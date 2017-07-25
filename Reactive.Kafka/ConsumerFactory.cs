@@ -22,6 +22,7 @@ namespace Reactive.Kafka
         {
             private sealed class ConsumerSettingsBuilder : IConsumerSettingsBuilder
             {
+                private readonly IDictionary<string, object> _customSettings = new Dictionary<string, object>();
                 private readonly ISet<string> _brokers = new HashSet<string>();
                 private string _groupId;
                 private TimeSpan? _sessionTimeout;
@@ -54,6 +55,11 @@ namespace Reactive.Kafka
                         settings.Add("client.id", _clientId);
                     }
                     settings.Add("group.id", _groupId);
+                    foreach(var kvp in _customSettings)
+                    {
+                        if (String.IsNullOrWhiteSpace(kvp.Key)) throw new InvalidOperationException("Setting cannot be null or whitespace.");
+                        settings.Add(kvp.Key, kvp.Value);
+                    }
                     return settings;
                 }
 
@@ -66,6 +72,12 @@ namespace Reactive.Kafka
                 public IConsumerSettingsBuilder WithClientId(string clientId)
                 {
                     _clientId = clientId;
+                    return this;
+                }
+
+                public IConsumerSettingsBuilder WithCustomSetting(string settingName, object settingValue)
+                {
+                    _customSettings[settingName] = settingValue;
                     return this;
                 }
             }
